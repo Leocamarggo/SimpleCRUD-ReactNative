@@ -1,10 +1,9 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import UserList from './views/UserList';
-import UserForm from './views/UserForm';
-import { Button, Icon } from 'react-native-elements';
-import { UsersProvider } from './context/UsersContext';
+import UserList from './src/views/UserList';
+import UserForm from './src/views/UserForm';
+import { UsersProvider } from './src/context/UsersContext';
 
 
 const Stack = createStackNavigator();
@@ -20,16 +19,9 @@ export default props =>{
                     <Stack.Screen
                         name="UserList"
                         component={UserList}
-                        options={({ navigation }) => {
+                        options={() => {
                             return{
-                                title: "Lista de Usuários",
-                                headerRight: () => (
-                                    <Button
-                                        onPress={() => navigation.navigate('UserForm')}
-                                        type="clear"
-                                        icon={<Icon name="add" size={25} color="white"/>}
-                                    />
-                                )
+                                title: "Lista de Usuários"
                             }
                         }}
                     />
@@ -48,10 +40,11 @@ export default props =>{
 
 const screenOptions = {
     headerStyle: {
-        backgroundColor: '#f4511e'
+        backgroundColor: '#6200ee'
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign: 'center'
     }
 }

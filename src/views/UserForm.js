@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { Text, View, TextInput, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button } from 'react-native';
 import UsersContext from '../context/UsersContext';
+import { TextInput } from 'react-native-paper';
 
 export default ({route, navigation}) =>{
     const [user, setUser] = useState(route.params ? route.params : {}); //Se o valor de "route.params" existir ele preenche o useState, se não existir ele deixa vazio
@@ -9,28 +10,29 @@ export default ({route, navigation}) =>{
     
     return(
         <View style={style.form}>
-            <Text>Name</Text>
+
             <TextInput
+                label='Nome completo'
                 style={style.input}
                 onChangeText={name => setUser({...user, name})} // Ele pega todos os valores de usuário e sobrescreve o nome
-                placeholder="Informe o Nome"
                 value={user.name}
+                mode='outlined'
             />
 
-            <Text>Email</Text>
             <TextInput
+                label='Email'
                 style={style.input}
                 onChangeText={email => setUser({...user, email})} // Ele pega todos os valores de usuário e sobrescreve o nome
-                placeholder="Informe o Email"
                 value={user.email}
+                mode='outlined'
             />
 
-            <Text>URL do Avatar</Text>
             <TextInput
+                label='URL da imagem'
                 style={style.input}
                 onChangeText={avatarUrl => setUser({...user, avatarUrl})} // Ele pega todos os valores de usuário e sobrescreve o nome
-                placeholder="Informe a URL"
                 value={user.avatarUrl}
+                mode='outlined'
             />
 
             <Button 
@@ -42,6 +44,7 @@ export default ({route, navigation}) =>{
                         payload: user
                     })
                 }}
+                color='#6200ee'
             />
         </View>
     )
@@ -52,9 +55,6 @@ const style = StyleSheet.create({
         padding:  12
     }, 
     input:{
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 10
-    }
+        marginBottom: 20
+    },
 })

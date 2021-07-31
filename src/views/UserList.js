@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { View, FlatList, Alert } from 'react-native';
-import { ListItem, Avatar } from 'react-native-elements'
+import { ListItem, Avatar, Icon } from 'react-native-elements'
 import UsersContext from '../context/UsersContext';
+import { Fab, NativeBaseProvider  } from "native-base";
 
 export default props =>{
 
@@ -29,7 +30,6 @@ export default props =>{
             <ListItem 
                 key={user.id} 
                 bottomDivider 
-                onPress={() => props.navigation.navigate('UserForm')}
             >
                 <Avatar source={{uri: user.avatarUrl}} />
                 <ListItem.Content>
@@ -43,7 +43,7 @@ export default props =>{
                 <ListItem.Chevron 
                     onPress={() => props.navigation.navigate('UserForm', user)}
                     name="edit"
-                    color="orange"
+                    color="#6200ee"
                     size={25}
                 />
                 <ListItem.Chevron 
@@ -57,12 +57,20 @@ export default props =>{
     }
 
     return(
-        <View>
-            <FlatList
-                keyExtractor={user => user.id.toString()}
-                data={state.users}
-                renderItem={getUserItem}
-            />
-        </View>
+        <NativeBaseProvider>
+            <View>
+                <FlatList
+                    keyExtractor={user => user.id.toString()}
+                    data={state.users}
+                    renderItem={getUserItem}
+                />
+                <Fab
+                    right={"42%"}
+                    icon={<Icon name="add" size={25} color="white"/>} 
+                    onPress={() => props.navigation.navigate('UserForm')}
+                    style={{backgroundColor: '#6200ee'}}
+                />
+            </View>
+        </NativeBaseProvider>
     )
-}
+};
